@@ -124,3 +124,7 @@ modules will be copied to the `./dist` folder.
 **A:** you must add them to `./src/host/` folder and then you have two choices. one, is to edit
 `./assets/CSXS/manifest.xml` file to declare them, or load them at runtime dynamically (better, you can read
     about it more later)
+
+#### TODO
+- integrate template rendering for `manifest.xml` and `.debug`
+- add plugin certification 
