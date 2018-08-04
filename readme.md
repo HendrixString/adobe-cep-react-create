@@ -127,4 +127,5 @@ modules will be copied to the `./dist` folder.
 
 #### TODO
 - integrate template rendering for `manifest.xml` and `.debug`
-- add plugin certification 
+- add plugin certification
+- do some files cleanup
