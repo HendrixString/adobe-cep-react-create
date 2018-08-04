@@ -1,0 +1,45 @@
+{
+  "name": "cep-test",
+  "version": "1.0.0",
+  "description": "demo for CEP",
+  "main": "./client-src/src/index.js",
+  "scripts": {
+    "build": "node ./scripts/build.js",
+    "start": "npm run client:dev-server",
+    "client:dev-server": "webpack-dev-server --config ./build-scripts/webpack.client.config.js --env.target=web --mode development --open",
+    "build:dev": "node ./build-scripts/build.js development",
+    "build:prod": "node ./build-scripts/build.js production",
+    "deploy:dev": "node ./build-scripts/deploy.js development",
+    "deploy:prod": "node ./build-scripts/deploy.js production",
+    "release:dev": "npm run build:dev && npm run deploy:dev",
+    "release:prod": "npm run build:prod && npm run deploy:prod",
+    "b": "babel ./client/js --out-dir ./client/out",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tomer Shalev (HendrixString)",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chalk": "^2.4.1",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "@material-ui/core": "^1.4.2",
+    "@material-ui/icons": "^2.0.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}
