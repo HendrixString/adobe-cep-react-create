@@ -1,5 +1,8 @@
 ## Create Adobe-CEP extension
 ### Adobe-CEP with React, Material-UI, Native Node modules, Webpack, Babel and ExtendScript
+
+<img src="kap.gif"/>
+
 this Adobe-CEP extension creator bootstraps for creating Adobe CC extensions easily with
 modern web technologies and with native node.js modules for session logic
 and with support for extendscript (host app). It is built in a semi opinionated

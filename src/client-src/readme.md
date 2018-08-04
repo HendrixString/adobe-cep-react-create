@@ -1,22 +1,8 @@
 #### UI
 
-right now I am using `Bootstrap`, which is a CSS framework.
-I would like trying out real UI frameworks that wraps the CSS
-and offers React components, such as:
-
-- https://material-ui.com/
-- http://react.semantic-ui.com/
-- https://react-bootstrap.github.io/getting-started/introduction
-- https://developer.microsoft.com/en-us/fabric#/
-
-I wasn't aware of other declarative frameworks so I used Bootstrap
-and wrote my own declarative components over it
-
-
-#### symlinks
-```bash
-ln -s "$PWD/test2" ps2dl
-```
+right now I am using `Material-UI`  
+I also have a `Bootstrap` version (but you will have to setup it's dependencies like
+css and js.)
 
 #### two app skins
 I wrote one app with `Bootstrap` and the other with `Material-UI`
