@@ -40,8 +40,9 @@ dist
 start with `./pluginrc.js`, this is the plugin config I created, here is an example
 ```javascript
 module.exports = {
-    packageId: "com.hendrix.ps2dl",
-    panelName : "hendrix demo",
+    extensionBundleId: 'com.hendrix.ps2dl',
+    extensionBundleName: 'ps2dl',
+    panelName: 'hendrix demo',
     root: __dirname,
     sourceFolder: path.join(__dirname, "src"),
     destinationFolder: path.join(__dirname, "dist")
@@ -126,6 +127,6 @@ modules will be copied to the `./dist` folder.
     about it more later)
 
 #### TODO
-- integrate template rendering for `manifest.xml` and `.debug`
+- integrate template rendering for and `.debug`
 - add plugin certification
 - do some files cleanup
