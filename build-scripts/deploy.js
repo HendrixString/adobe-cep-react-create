@@ -11,7 +11,7 @@ const srcFolder = pluginConfig.sourceFolder
 const utils = require('./utils.js')
 var env = utils.resolveEnv()
 const isDev = env==='development'
-const nameTarget = pluginConfig.packageId
+const nameTarget = pluginConfig.extensionBundleId
 const resolvedTargetFolder = path.join(os.homedir(),
                                 `Library/Application Support/Adobe/CEP/extensions/${nameTarget}`)
 

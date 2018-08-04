@@ -57,6 +57,11 @@ try {
     utils.log_progress('copying index.html...')
     utils.copyRecursiveSync(fromSrc('index.html'), fromDist('index.html'))
     // copy CSXS folder
+    utils.log_progress('rendering manifest.xml ...')
+    var manifest_template = require(path.join(fromRoot('assets'), 'CSXS', 'manifest.template.xml.js'))
+    var rendered_xml = manifest_template(pluginConfig)
+    var xml_out_file = path.join(fromRoot('assets'), 'CSXS', 'manifest.xml')
+    fs.writeFileSync(xml_out_file, rendered_xml, 'utf-8')
     utils.log_progress('copying Adobe assets...')
     utils.copyRecursiveSync(fromRoot('assets'), distFolder)
 
