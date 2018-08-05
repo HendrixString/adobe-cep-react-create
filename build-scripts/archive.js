@@ -34,12 +34,13 @@ function archive() {
 function prepareCert() {
     const options_custom_cert = certificate_options.customCert
     const options_self_sign = certificate_options.selfSign
-    const isCustom = options_custom_cert.path.trim() !== ''
-    var path, password
+    const isCustom = options_custom_cert && options_custom_cert.path.trim() !== ''
+    var path='', password=''
+    
     if(isCustom) {
         path = options_custom_cert.path
         password = options_custom_cert.password
-    } else {
+    } else if(options_self_sign){
         path = options_self_sign.output
         password = options_self_sign.password
     }

@@ -53,22 +53,30 @@ module.exports = {
     sourceFolder: srcFolder,
     destinationFolder: destFolder,
     certificate : {
-        country: 'US',
-        province: 'CA',
-        org: 'org',
-        name: 'name',
-        password: 'password',
-        locality: 'locality',
-        orgUnit: 'orgUnit',
-        email: 'your@email.com',
-        output: certPath
+        customCert: {
+            path: '',
+            password: 'password'
+        },
+        selfSign: {
+            country: 'US',
+            province: 'CA',
+            org: 'org',
+            name: 'name',
+            password: 'password',
+            locality: 'locality',
+            orgUnit: 'orgUnit',
+            email: 'your@email.com',
+            output: certPath
+        }
+
     }
+
 }
 ```
 when build is happening, then the build will pickup your package id and panel name
 and other configurations from this file and will use it against a template that will
 generate the `./dist/CSXS/manifest.xml` and `.debug` (in dev mode) file for you.
-
+also, I added support for a custom certificate and for a self-signed certificate.  
 feel free to modify the contents of the `assets` folder for you own need.
 
 ### what does this include ?
