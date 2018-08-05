@@ -142,7 +142,11 @@ modules will be copied to the `./dist` folder.
 `./assets/CSXS/manifest.xml` file to declare them, or load them at runtime dynamically (better, you can read
     about it more later)
 
-#### TODO
-- https://github.com/Adobe-CEP/Getting-Started-guides/tree/master/Package%20Distribute%20Install
-- http://uberplugins.cc/help/how-to-install-photoshop-extension/
-- http://www.davidebarranca.com/2014/05/html-panels-tips-10-packaging-zxp-installers/
+#### How to install
+- for dev mode with chrome debugging, simply `npm run release:dev`
+- for prod mode with **zxp** signed package, simply `npm run release:prod`, to install the zxp package,
+i advise the following resource:
+    - http://install.anastasiy.com/
+    - http://zxpinstaller.com/
+    - https://github.com/Adobe-CEP/Getting-Started-guides/tree/master/Package%20Distribute%20Install
+    - http://uberplugins.cc/help/how-to-install-photoshop-extension/

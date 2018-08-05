@@ -6,6 +6,8 @@ const certPath = path.join(destFolder, "cert.p12")
 module.exports = {
     extensionBundleId: 'com.hendrix.demo',
     extensionBundleName: 'demo',
+    extensionBundleVersion: '1.0.1',
+    cepVersion: '7.0',
     panelName: 'hendrix demo',
     width: '400',
     height: '600',

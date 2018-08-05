@@ -1,10 +1,13 @@
 module.exports = (props) =>
 `<?xml version="1.0" encoding="UTF-8"?>
 <!--Copyright 2018 Adobe. All rights reserved.This file is licensed to you under the Apache License, Version 2.0 (the "License");you may not use this file except in compliance with the License. You may obtain a copyof the License at http://www.apache.org/licenses/LICENSE-2.0Unless required by applicable law or agreed to in writing, software distributed underthe License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONSOF ANY KIND, either express or implied. See the License for the specific languagegoverning permissions and limitations under the License. -->
-<ExtensionManifest ExtensionBundleId="${props.extensionBundleId}" ExtensionBundleVersion="1.0.0"
-    ExtensionBundleName="${props.extensionBundleName}" Version="7.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   ExtensionBundleId="${props.extensionBundleId}"
+                   ExtensionBundleVersion="${props.extensionBundleVersion}"
+                   ExtensionBundleName="${props.extensionBundleName}"
+                   Version="${props.cepVersion}">
   <ExtensionList>
-    <Extension Id="${props.extensionBundleId}" Version="1.0.0">
+    <Extension Id="${props.extensionBundleId}" Version="${props.extensionBundleVersion}">
       <!-- <Host Name="PHXS" Port="8088"/>
       <Host Name="PHSP" Port="8088"/> -->
     </Extension>
@@ -26,7 +29,7 @@ module.exports = (props) =>
       <Locale Code="All" />
     </LocaleList>
     <RequiredRuntimeList>
-      <RequiredRuntime Name="CSXS" Version="6.0" />
+      <RequiredRuntime Name="CSXS" Version="${props.cepVersion}" />
     </RequiredRuntimeList>
   </ExecutionEnvironment>
   <DispatchInfoList>
