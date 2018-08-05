@@ -127,5 +127,8 @@ modules will be copied to the `./dist` folder.
     about it more later)
 
 #### TODO
-- add plugin certification
+- add plugin certification:
+- https://github.com/Adobe-CEP/Getting-Started-guides/tree/master/Package%20Distribute%20Install
+- http://uberplugins.cc/help/how-to-install-photoshop-extension/
+- http://www.davidebarranca.com/2014/05/html-panels-tips-10-packaging-zxp-installers/
 - do some files cleanup

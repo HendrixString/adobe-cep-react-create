@@ -5,23 +5,59 @@ const { execSync } = require('child_process')
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
+const utils = require('./utils.js')
 const pluginConfig = require('../pluginrc.js')
 const distFolder = pluginConfig.destinationFolder
 const srcFolder = pluginConfig.sourceFolder
-const utils = require('./utils.js')
 var env = utils.resolveEnv()
 const isDev = env==='development'
-const nameTarget = pluginConfig.extensionBundleId
-const resolvedTargetFolder = path.join(os.homedir(),
-                                `Library/Application Support/Adobe/CEP/extensions/${nameTarget}`)
+const isWindows = isWindows()
+const extensionBundleId = pluginConfig.extensionBundleId
+const resolvedTargetFolder = resolveDeploymentFolder()
 
-utils.log_progress(`DEPLOY for ${env}`, 'blue')
+deploy()
 
-cleanTarget(resolvedTargetFolder)
-if(isDev)
-    deployDevMode()
-else
-    deployProdMode()
+/**
+ * deploy
+ *
+ */
+function deploy() {
+    utils.log_progress(`DEPLOY for ${env}`, 'blue')
+
+    cleanTarget(resolvedTargetFolder)
+
+    if(isDev)
+        deployDevMode()
+    else
+        deployProdMode()
+
+    printDeploymentFolder()
+}
+
+function printDeploymentFolder() {
+    utils.log_progress(`deployed to folder ${resolvedTargetFolder}`, 'green')
+}
+
+/**
+ *  resolve the final deployment folder
+ *
+ */
+function resolveDeploymentFolder() {
+    return path.join(resolveExtensionFolder(), extensionBundleId)
+}
+
+/**
+ *  per os Adobe extension folder
+ *
+ */
+function resolveExtensionFolder() {
+    if (isWindows) {
+        return 'C:\\Program Files (x86)\\Common Files\\Adobe\\CEP\\extensions';
+    } else {
+        return path.join(os.homedir(), 'Library/Application Support/Adobe/CEP/extensions')
+    }
+
+}
 
 /**
  * cleanTarget - clean the target folder. if it is a
@@ -40,6 +76,11 @@ function cleanTarget(target) {
     }
 }
 
+function isWindows() {
+    return process.platform.startsWith('win')
+}
+
+
 /**
  * deployDevMode - just create a symlink
  *
@@ -47,6 +88,13 @@ function cleanTarget(target) {
 function deployDevMode() {
     try {
         utils.log_progress('patching')
+        execSync('defaults write com.adobe.CSXS.15 PlayerDebugMode 1', {stdio:[0,1,2]})
+        execSync('defaults write com.adobe.CSXS.14 PlayerDebugMode 1', {stdio:[0,1,2]})
+        execSync('defaults write com.adobe.CSXS.13 PlayerDebugMode 1', {stdio:[0,1,2]})
+        execSync('defaults write com.adobe.CSXS.12 PlayerDebugMode 1', {stdio:[0,1,2]})
+        execSync('defaults write com.adobe.CSXS.11 PlayerDebugMode 1', {stdio:[0,1,2]})
+        execSync('defaults write com.adobe.CSXS.10 PlayerDebugMode 1', {stdio:[0,1,2]})
+        execSync('defaults write com.adobe.CSXS.9 PlayerDebugMode 1', {stdio:[0,1,2]})
         execSync('defaults write com.adobe.CSXS.8 PlayerDebugMode 1', {stdio:[0,1,2]})
         execSync('defaults write com.adobe.CSXS.7 PlayerDebugMode 1', {stdio:[0,1,2]})
         execSync('defaults write com.adobe.CSXS.6 PlayerDebugMode 1', {stdio:[0,1,2]})
@@ -59,7 +107,9 @@ function deployDevMode() {
 
     utils.log_progress('creating symlink into extensions folder')
     try {
-        fs.symlinkSync(distFolder, resolvedTargetFolder, 'dir')
+        var type = isWindows ? 'junction' : 'dir'
+
+        fs.symlinkSync(distFolder, resolvedTargetFolder, type)
     } catch(err) {
         utils.log_progress(err, 'red')
     }
