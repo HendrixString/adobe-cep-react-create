@@ -12,7 +12,7 @@ way so you can focus on writing your great extensions.
 - `npm run build:dev` / `npm run build:prod` - will build into `./dist` folder
 - `npm run deploy:dev` / `npm run deploy:prod` - will deploy `./dist` folder into the extension folder.
 if in dev mode, it will create a **symbolic link**, otherwise it will copy the entire folder.
-- `npm run archive` will create a self signed certificate and sign a **ZXP** package ready yo publish
+- `npm run archive` will create a self signed certificate and sign a **ZXP** package ready to publish
 - `npm run release:dev` / `npm run release:prod` - will build, deploy and archive (in production)
 
 the output is a `./dist` extension folder
@@ -124,6 +124,7 @@ you can find:
 - `/build-script/build.js development/production` this will build the entire thing
 - `/build-script/deploy.js development/production` this will deploy the entire thing into
 the adobe extensions folder in debug mode currently, I still need to sign the extension
+- `/build-script/archive.js` this will archive the distribution in **ZXP** format, ready to be published
 
 #### FAQ
 **Q:** how do I add more web development modules (like redux) ?  
