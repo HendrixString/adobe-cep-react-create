@@ -9,7 +9,7 @@ const { execSync } = require('child_process')
 const utils = require('./utils.js')
 const webpack = require('webpack')
 const pluginConfig = require('../pluginrc.js')
-var env = utils.resolveEnv()
+const env = utils.resolveEnv()
 const isDev = env==='development'
 const distFolder = pluginConfig.destinationFolder
 const pluginFolder = path.join(distFolder, pluginConfig.extensionBundleId)

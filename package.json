@@ -11,6 +11,7 @@
     "build:prod": "node ./build-scripts/build.js production",
     "deploy:dev": "node ./build-scripts/deploy.js development",
     "deploy:prod": "node ./build-scripts/deploy.js production",
+    "archive": "node ./build-scripts/archive.js",
     "release:dev": "npm run build:dev && npm run deploy:dev",
     "release:prod": "npm run build:prod && npm run deploy:prod",
     "b": "babel ./client/js --out-dir ./client/out",

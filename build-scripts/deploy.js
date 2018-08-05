@@ -11,7 +11,7 @@ const distFolder = path.join(pluginConfig.destinationFolder, pluginConfig.extens
 const srcFolder = pluginConfig.sourceFolder
 var env = utils.resolveEnv()
 const isDev = env==='development'
-const isWindows = resolveWindows()
+const isWindows = utils.resolveWindows()
 const extensionBundleId = pluginConfig.extensionBundleId
 const resolvedTargetFolder = resolveDeploymentFolder()
 
@@ -33,7 +33,7 @@ function deploy() {
 
     printDeploymentFolder()
 
-    utils.log_progress('DONE')
+    utils.log_progress('DONE', 'blue')
 }
 
 function printDeploymentFolder() {
@@ -77,11 +77,6 @@ function cleanTarget(target) {
         utils.log_progress(err, 'red')
     }
 }
-
-function resolveWindows() {
-    return process.platform.startsWith('win')
-}
-
 
 /**
  * deployDevMode - just create a symlink
@@ -132,5 +127,4 @@ function deployProdMode() {
         utils.log_progress(err, 'red')
     }
 
-    utils.log_progress('DONE', 'blue')
 }

@@ -65,10 +65,18 @@ function log(val) {
     console.log(val)
 }
 
+function log_error(val) {
+    log_progress(val, 'red')
+}
+
 function log_progress(val, color) {
     var c = color ? color : 'yellow'
 
     console.log(chalk[c](val))
+}
+
+function resolveWindows() {
+    return process.platform.startsWith('win')
 }
 
 /**
@@ -92,6 +100,8 @@ module.exports = {
     deleteFolderRecursive,
     copyRecursiveSync,
     log,
+    log_error,
     log_progress,
+    resolveWindows,
     resolveEnv
 }
