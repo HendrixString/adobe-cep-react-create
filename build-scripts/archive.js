@@ -1,18 +1,13 @@
 /**
  * archive, generates self signed certificate and signing a zxp package
  */
-const { execSync } = require('child_process')
 const fs = require('fs')
-const os = require('os')
 const path = require('path')
 const zxpSignCmd = require('zxp-sign-cmd')
 const utils = require('./utils.js')
 const pluginConfig = require('../pluginrc.js')
 const distFolder = pluginConfig.destinationFolder
 const pluginFolder = path.join(distFolder, pluginConfig.extensionBundleId)
-const srcFolder = pluginConfig.sourceFolder
-const env = utils.resolveEnv()
-const isDev = env==='development'
 const extensionBundleId = pluginConfig.extensionBundleId
 const certificate_options = pluginConfig.certificate
 const zxpFile = path.join(distFolder, pluginConfig.extensionBundleId + '.zxp')
@@ -76,21 +71,4 @@ function signPackage() {
 
     })
 
-}
-
-/**
- * deployProdMode - copy the whole dist folder
- *
- */
-function deployProdMode() {
-
-    utils.log_progress('copying into extensions folder')
-    try {
-        utils.copyRecursiveSync(distFolder, resolvedTargetFolder)
-
-    } catch(err) {
-        utils.log_progress(err, 'red')
-    }
-
-    utils.log_progress('DONE', 'blue')
 }
