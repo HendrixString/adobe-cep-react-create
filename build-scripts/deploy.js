@@ -7,11 +7,11 @@ const os = require('os')
 const path = require('path')
 const utils = require('./utils.js')
 const pluginConfig = require('../pluginrc.js')
-const distFolder = pluginConfig.destinationFolder
+const distFolder = path.join(pluginConfig.destinationFolder, pluginConfig.extensionBundleId)
 const srcFolder = pluginConfig.sourceFolder
 var env = utils.resolveEnv()
 const isDev = env==='development'
-const isWindows = isWindows()
+const isWindows = resolveWindows()
 const extensionBundleId = pluginConfig.extensionBundleId
 const resolvedTargetFolder = resolveDeploymentFolder()
 
@@ -32,6 +32,8 @@ function deploy() {
         deployProdMode()
 
     printDeploymentFolder()
+
+    utils.log_progress('DONE')
 }
 
 function printDeploymentFolder() {
@@ -76,7 +78,7 @@ function cleanTarget(target) {
     }
 }
 
-function isWindows() {
+function resolveWindows() {
     return process.platform.startsWith('win')
 }
 
@@ -114,7 +116,6 @@ function deployDevMode() {
         utils.log_progress(err, 'red')
     }
 
-    utils.log_progress('DONE')
 }
 
 /**
