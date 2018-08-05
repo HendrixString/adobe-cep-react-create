@@ -127,6 +127,5 @@ modules will be copied to the `./dist` folder.
     about it more later)
 
 #### TODO
-- integrate template rendering for and `.debug`
 - add plugin certification
 - do some files cleanup
