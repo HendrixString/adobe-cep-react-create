@@ -20,7 +20,7 @@ function archive() {
     prepareCert()
     .then(signPackage)
     .then(res => {
-        utils.log_progress(`package is signed: ${zxpFile}`)
+        utils.log_progress(`package is signed: ${zxpFile}`, 'green')
         utils.log_progress('DONE', 'blue')
     })
     .catch(err => {utils.log_error(err)})
@@ -36,7 +36,7 @@ function prepareCert() {
     const options_self_sign = certificate_options.selfSign
     const isCustom = options_custom_cert && options_custom_cert.path.trim() !== ''
     var path='', password=''
-    
+
     if(isCustom) {
         path = options_custom_cert.path
         password = options_custom_cert.password
