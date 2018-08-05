@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+module.exports = (props) =>
+`<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionList>
-  <Extension Id="com.hendrix.ps2dl">
+  <Extension Id="${props.extensionBundleId}">
   <HostList>
     <Host Name="PHXS" Port="3001" />
     <Host Name="PHSP" Port="3002" />
@@ -14,4 +15,4 @@
     <Host Name="DRWV" Port="3010" />
   </HostList>
   </Extension>
-</ExtensionList>
+</ExtensionList>`

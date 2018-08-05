@@ -14,6 +14,7 @@ const isDev = env==='development'
 const distFolder = pluginConfig.destinationFolder
 const srcFolder = pluginConfig.sourceFolder
 const rootFolder = pluginConfig.root
+const templatesFolder = path.join(fromRoot('assets'), 'templates')
 const webpack_client_config_path = path.join(__dirname, 'webpack.client.config.js')
 const webpack_session_config_path = path.join(__dirname, 'webpack.session.config.js')
 utils.log_progress(`BUILD for ${env}`, 'blue')
@@ -56,17 +57,24 @@ try {
     // fs.createReadStream('./src/index.html').pipe(fs.createWriteStream('./dist/index.html'));
     utils.log_progress('copying index.html...')
     utils.copyRecursiveSync(fromSrc('index.html'), fromDist('index.html'))
-    // copy CSXS folder
-    utils.log_progress('rendering manifest.xml ...')
-    var manifest_template = require(path.join(fromRoot('assets'), 'CSXS', 'manifest.template.xml.js'))
-    var rendered_xml = manifest_template(pluginConfig)
-    var xml_out_file = path.join(fromRoot('assets'), 'CSXS', 'manifest.xml')
-    fs.writeFileSync(xml_out_file, rendered_xml, 'utf-8')
+    // copy other assets
     utils.log_progress('copying Adobe assets...')
-    utils.copyRecursiveSync(fromRoot('assets'), distFolder)
+    utils.copyRecursiveSync(fromRoot('assets'), distFolder, ['templates'])
+    // render manifest.xml
+    utils.log_progress('rendering manifest.xml ...')
+    var manifest_template = require(path.join(templatesFolder, 'manifest.template.xml.js'))
+    var rendered_xml = manifest_template(pluginConfig)
+    var xml_out_file = path.join(distFolder, 'CSXS', 'manifest.xml')
+    fs.writeFileSync(xml_out_file, rendered_xml, 'utf-8')
 
-    if(!isDev) {
-        // delete the .debug file
+    // in dev, also render the .debug file template
+    if(isDev) {
+        // render .debug file
+        utils.log_progress('rendering .debug file ...')
+        var debug_template = require(path.join(templatesFolder, '.debug.template.js'))
+        var rendered_debug = debug_template(pluginConfig)
+        var debug_out_file = path.join(distFolder, '.debug')
+        fs.writeFileSync(debug_out_file, rendered_debug, 'utf-8')
     }
 
     utils.log_progress('DONE', 'blue')

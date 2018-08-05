@@ -4,6 +4,8 @@ module.exports = {
     extensionBundleId: 'com.hendrix.ps2dl',
     extensionBundleName: 'ps2dl',
     panelName: 'hendrix demo',
+    width: '400',
+    height: '600',
     root: __dirname,
     sourceFolder: path.join(__dirname, "src"),
     destinationFolder: path.join(__dirname, "dist")

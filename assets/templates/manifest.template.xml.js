@@ -49,16 +49,16 @@ module.exports = (props) =>
           <Menu>${props.panelName}</Menu>
           <Geometry>
             <Size>
-              <Width>400</Width>
-              <Height>600</Height>
+              <Width>${props.width}</Width>
+              <Height>${props.height}</Height>
             </Size>
             <MinSize>
-              <Width>400</Width>
-              <Height>400</Height>
+              <Width>${props.width}</Width>
+              <Height>${props.height}</Height>
             </MinSize>
             <MaxSize>
-              <Width>400</Width>
-              <Height>600</Height>
+              <Width>${props.width}</Width>
+              <Height>${props.height}</Height>
             </MaxSize>
           </Geometry>
           <Icons>
