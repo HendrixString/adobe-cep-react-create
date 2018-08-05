@@ -12,40 +12,55 @@ way so you can focus on writing your great extensions.
 - `npm run build:dev` / `npm run build:prod` - will build into `./dist` folder
 - `npm run deploy:dev` / `npm run deploy:prod` - will deploy `./dist` folder into the extension folder.
 if in dev mode, it will create a **symbolic link**, otherwise it will copy the entire folder.
-- `npm run release:dev` / `npm run release:prod` - will build and deploy
+- `npm run archive` will create a self signed certificate and sign a **ZXP** package ready yo publish
+- `npm run release:dev` / `npm run release:prod` - will build, deploy and archive (in production)
 
 the output is a `./dist` extension folder
 ```
 dist
-  index.html
-  .debug
-  CSXS/
-    manifest.xml
-  icons/
-    favicon.ico    
-  node_modules/
-  host/
-    index.js
-  client-dist/
-    bundle.js
-    main.css
-  session-dist/
-    bundle.js
-  host/
-  libs/
-    CSInterface.js
+    com.package.name/
+        index.html
+        .debug
+        CSXS/
+            manifest.xml
+        icons/
+            favicon.ico    
+        node_modules/
+        host/
+            index.js
+        client-dist/
+            bundle.js
+            main.css
+        session-dist/
+            bundle.js
+        host/
+        libs/
+            CSInterface.js
 ```
 
 #### how to customize
 start with `./pluginrc.js`, this is the plugin config I created, here is an example
 ```javascript
 module.exports = {
-    extensionBundleId: 'com.hendrix.ps2dl',
-    extensionBundleName: 'ps2dl',
+    extensionBundleId: 'com.hendrix.demo',
+    extensionBundleName: 'demo',
     panelName: 'hendrix demo',
-    root: __dirname,
-    sourceFolder: path.join(__dirname, "src"),
-    destinationFolder: path.join(__dirname, "dist")
+    width: '400',
+    height: '600',
+    root: root,
+    sourceFolder: srcFolder,
+    destinationFolder: destFolder,
+    certificate : {
+        country: 'US',
+        province: 'CA',
+        org: 'org',
+        name: 'name',
+        password: 'password',
+        locality: 'locality',
+        orgUnit: 'orgUnit',
+        email: 'your@email.com',
+        output: certPath
+    }
 }
 ```
 when build is happening, then the build will pickup your package id and panel name
@@ -127,8 +142,6 @@ modules will be copied to the `./dist` folder.
     about it more later)
 
 #### TODO
-- add plugin certification:
 - https://github.com/Adobe-CEP/Getting-Started-guides/tree/master/Package%20Distribute%20Install
 - http://uberplugins.cc/help/how-to-install-photoshop-extension/
 - http://www.davidebarranca.com/2014/05/html-panels-tips-10-packaging-zxp-installers/
-- do some files cleanup

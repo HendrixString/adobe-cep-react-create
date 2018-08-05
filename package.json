@@ -13,7 +13,7 @@
     "deploy:prod": "node ./build-scripts/deploy.js production",
     "archive": "node ./build-scripts/archive.js",
     "release:dev": "npm run build:dev && npm run deploy:dev",
-    "release:prod": "npm run build:prod && npm run deploy:prod",
+    "release:prod": "npm run build:prod && npm run deploy:prod && npm run archive",
     "b": "babel ./client/js --out-dir ./client/out",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

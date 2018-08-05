@@ -4,8 +4,8 @@ const srcFolder = path.join(root, "src")
 const destFolder = path.join(root, "dist")
 const certPath = path.join(destFolder, "cert.p12")
 module.exports = {
-    extensionBundleId: 'com.hendrix.ps2dl',
-    extensionBundleName: 'ps2dl',
+    extensionBundleId: 'com.hendrix.demo',
+    extensionBundleName: 'demo',
     panelName: 'hendrix demo',
     width: '400',
     height: '600',

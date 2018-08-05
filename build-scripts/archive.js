@@ -1,5 +1,5 @@
 /**
- * deploy in dev mode or production
+ * archive, generates self signed certificate and signing a zxp package
  */
 const { execSync } = require('child_process')
 const fs = require('fs')
