@@ -15,14 +15,22 @@ module.exports = {
     sourceFolder: srcFolder,
     destinationFolder: destFolder,
     certificate : {
-        country: 'US',
-        province: 'CA',
-        org: 'org',
-        name: 'name',
-        password: 'password',
-        locality: 'locality',
-        orgUnit: 'orgUnit',
-        email: 'your@email.com',
-        output: certPath
+        customCert: {
+            path: '',
+            password: 'password'
+        },
+        selfSign: {
+            country: 'US',
+            province: 'CA',
+            org: 'org',
+            name: 'name',
+            password: 'password',
+            locality: 'locality',
+            orgUnit: 'orgUnit',
+            email: 'your@email.com',
+            output: certPath
+        }
+
     }
+
 }

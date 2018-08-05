@@ -17,11 +17,7 @@ archive()
 function archive() {
     utils.log_progress('ARCHIVE', 'blue')
 
-    generateSelfSignCert()
-    .then(res => {
-        utils.log_progress('generated a self signed certificate')
-        return signPackage
-    })
+    prepareCert()
     .then(signPackage)
     .then(res => {
         utils.log_progress(`package is signed: ${zxpFile}`)
@@ -31,19 +27,44 @@ function archive() {
 }
 
 /**
- * generate self sign the certificate
+ * find a custom certificate or generate a self sign the certificate
  *
- * @return {Promise}  a promise
+ * @return {Promise} a promise, that resolves the cert data {path, password}
  */
-function generateSelfSignCert() {
-    const options = certificate_options
+function prepareCert() {
+    const options_custom_cert = certificate_options.customCert
+    const options_self_sign = certificate_options.selfSign
+    const isCustom = options_custom_cert.path.trim() !== ''
+    var path, password
+    if(isCustom) {
+        path = options_custom_cert.path
+        password = options_custom_cert.password
+    } else {
+        path = options_self_sign.output
+        password = options_self_sign.password
+    }
+
+    const isValid = path!==undefined && path.trim()!==''
+    const data = {path, password}
 
     return new Promise((resolve, reject) => {
-        zxpSignCmd.selfSignedCert(options, function (error, result) {
-            if(error) reject(error)
-            else resolve(result)
+        if(!isValid) {
+            reject('no valid cert info')
 
-        })
+            return
+        }
+
+        if(isCustom) {
+            utils.log_progress('found a custom certificate')
+            resolve(data)
+        } else {
+            utils.log_progress('generating a self signed certificate')
+            zxpSignCmd.selfSignedCert(options_self_sign, function (error, result) {
+                if(error) reject(error)
+                else resolve(data)
+            })
+
+        }
 
     })
 
@@ -52,14 +73,16 @@ function generateSelfSignCert() {
 /**
  * sign the package
  *
+ * @param  {{path, password}} cert description
+ *
  * @return {Promise}  a promise
  */
-function signPackage() {
+function signPackage(cert) {
     const options = {
         input: pluginFolder,
         output: zxpFile,
-        cert: certificate_options.output,
-        password: certificate_options.password
+        cert: cert.path,
+        password: cert.password
     }
 
     return new Promise((resolve, reject) => {
