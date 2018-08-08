@@ -6,6 +6,7 @@ const path = require('path')
 const zxpSignCmd = require('zxp-sign-cmd')
 const utils = require('./utils.js')
 const pluginConfig = require('../pluginrc.js')
+const isWindows = utils.resolveWindows()
 const distFolder = pluginConfig.destinationFolder
 const pluginFolder = path.join(distFolder, pluginConfig.extensionBundleId)
 const extensionBundleId = pluginConfig.extensionBundleId
@@ -47,6 +48,14 @@ function prepareCert() {
 
     const isValid = path!==undefined && path.trim()!==''
     const data = {path, password}
+
+    // on non windows, we need to change the permissions
+    if(!isWindows) {
+        var provider = require('zxp-provider').osx
+        // for some reason the path returns quoted, so I un-quote
+        var unquote = provider.substring(1, provider.length - 1)
+        fs.chmodSync(unquote, '755')
+    }
 
     return new Promise((resolve, reject) => {
         if(!isValid) {
