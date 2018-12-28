@@ -1,3 +1,7 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react'
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -19,7 +23,7 @@ export default class PluginItem extends React.Component {
     }
 
     state = {
-        checked: false
+        checked: true
     }
 
     internal_check(on) {

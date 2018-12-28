@@ -1,3 +1,7 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react'
 
 export default class Debug extends React.Component {
@@ -11,5 +15,5 @@ export default class Debug extends React.Component {
         )
 
     }
-    
+
 }

@@ -1,3 +1,7 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react'
 
 function colorToCss(color) {

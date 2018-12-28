@@ -1,12 +1,18 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import EventEmitter from 'events'
 import scriptLoader from './ScriptLoader'
-
+import DataManagers from './managers/DataManagers.js'
 /**
  * the main plugin session. This can enter the node modules as
  * well as the host
  *
  */
 class Session {
+
+    _managers = new DataManagers()
 
     constructor() {
         //super()
@@ -19,16 +25,29 @@ class Session {
      *
      */
     init() {
+        // init before everything so I can intercept console.log
+        this._managers.init()
         this.log('session is initing...')
-
-        // var fs = require('fs-extra')
-        //console.log(fs)
-
         // load jsx file dynamically
         this.log('loading the main jsx file')
         scriptLoader.loadJSX('main.jsx')
+
+        // some testing
         this.test()
+        // var fs = require('fs-extra')
+        //console.log(fs)
+
         this.log('session is inited')
+    }
+
+
+    /**
+     * get data managers
+     *
+     * @return {type}  description
+     */
+    get managers() {
+        return this._managers
     }
 
     /**
@@ -61,7 +80,36 @@ class Session {
      * @return {object} describes how well the execution of plugin was
      */
     invokePlugin(options) {
-        this.log('nothing here yet')
+        const { folderPath, isFlattenChecked,
+                isInfoChecked, isInspectVisibleChecked,
+                isMasksChecked, isTexturesChecked,
+                isMeaningfulNamesChecked, isHierarchicalChecked} = options
+
+        // i reparse everything to detect failures
+        const pluginData = {
+            destinationFolder: folderPath,
+            exportInfoJson: isInfoChecked,
+            inspectOnlyVisibleLayers: isInspectVisibleChecked,
+            exportMasks: isMasksChecked,
+            exportTextures: isTexturesChecked,
+            flatten: !isHierarchicalChecked,
+            namePrefix: isMeaningfulNamesChecked ? 'layer' : undefined
+        }
+
+        var that = this
+
+        return new Promise((resolve, reject) => {
+
+            scriptLoader.evalScript('invoke_document_worker', pluginData)
+                        .then((res) => {
+                            resolve(JSON.parse(res))
+                        })
+                        .catch(err => {
+                            reject(err)
+                        })
+
+        })
+
     }
 
     /**

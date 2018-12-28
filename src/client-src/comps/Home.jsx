@@ -1,3 +1,7 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react'
 import Paper from "@material-ui/core/Paper"
 import List from "@material-ui/core/List"
@@ -33,8 +37,10 @@ class Home extends React.Component {
         this.textureItemRef = React.createRef()
         this.masksItemRef = React.createRef()
         this.infoItemRef = React.createRef()
-        this.flattenItemRef = React.createRef()
+        this.hierarchicalItemRef = React.createRef()
+        this.inspectVisibleItemRef = React.createRef()
         this.browseItemRef = React.createRef()
+        this.namesItemRef = React.createRef()
     }
 
     /**
@@ -46,7 +52,9 @@ class Home extends React.Component {
         var isTexturesChecked = this.textureItemRef.current.isChecked
         var isMasksChecked = this.masksItemRef.current.isChecked
         var isInfoChecked = this.infoItemRef.current.isChecked
-        var isFlattenChecked = this.flattenItemRef.current.isChecked
+        var isHierarchicalChecked = this.hierarchicalItemRef.current.isChecked
+        var isInspectVisibleChecked = this.inspectVisibleItemRef.current.isChecked
+        var isMeaningfulNamesChecked = this.namesItemRef.current.isChecked
 
         var { onExecutePlugin } = this.props
 
@@ -55,7 +63,9 @@ class Home extends React.Component {
             isTexturesChecked,
             isMasksChecked,
             isInfoChecked,
-            isFlattenChecked
+            isMeaningfulNamesChecked,
+            isHierarchicalChecked,
+            isInspectVisibleChecked
         })
     }
 
@@ -72,8 +82,12 @@ class Home extends React.Component {
                                     desc='export masks' icon='layers'/>
                         <PluginItem ref={this.infoItemRef} index='2' title='Info'
                                     desc='export info json' icon='info'/>
-                        <PluginItem ref={this.flattenItemRef} index='3' title='Flatten'
-                                    desc='flatten display list' icon='list'/>
+                        <PluginItem ref={this.hierarchicalItemRef} index='3' title='Hierarchical'
+                                    desc='hierarchical display list or flatten' icon='list'/>
+                        <PluginItem ref={this.inspectVisibleItemRef} index='4' title='Visibility'
+                                    desc='inspect only visible layers' icon='visibility'/>
+                        <PluginItem ref={this.namesItemRef} index='5' title='Names'
+                                    desc='maningful names for assets' icon='build'/>
                         <BrowseItem innerRef={this.browseItemRef}/>
                     </List>
                     <Button onClick={this.export_onClick}

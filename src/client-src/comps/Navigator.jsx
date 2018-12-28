@@ -1,23 +1,29 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react'
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Icon from '@material-ui/core/Icon'
+import AppBar from '@material-ui/core/AppBar';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import Hideable from './Hideable.jsx'
 
-function colorToCss(color) {
-    return {
-        backgroundColor: color
-    }
-}
-
 const styles = theme => ({
     root: {
-        flexGrow: 1,
+        flexDirection: 'column',
         width: '100%',
+        height: '100%',
+        display: 'flex',
         backgroundColor: theme.palette.background.paper
+    },
+    contentContainer: {
+        height: '100%',
+        overflow: 'scroll',
+        overflowX: 'hidden'
     }
 })
 
@@ -37,6 +43,12 @@ class Navigator extends React.Component {
 
     handleChange = (event, value) => {
         this.setState({ activeTabIndex: value })
+
+        // notidy observer
+        const {data, onNavigateChange} = this.props
+
+        if(onNavigateChange)
+            onNavigateChange(value, data[value].title)
     }
 
     /**
@@ -58,7 +70,7 @@ class Navigator extends React.Component {
      * @param  {type} data description
      * @return {type}      description
      */
-    tabContentFactory(data, index, active) {
+    tabContentFactory(data, index, active, classes) {
         var title = data.title.toLowerCase()
         var comp = data.comp
 
@@ -73,17 +85,18 @@ class Navigator extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Paper >
+                <AppBar position="static">
                     <Tabs fullWidth
                         value={activeTabIndex}
                         onChange={this.handleChange}
-                        indicatorColor="secondary"
-                        textColor="primary">
+                        >
 
                         {data.map((item,i) => this.tabFactory(item, i))}
                     </Tabs>
-                </Paper>
-                {data.map((item,i) => this.tabContentFactory(item, i, activeTabIndex===i))}
+                </AppBar>
+                <div className={classes.contentContainer}>
+                    {data.map((item,i) => this.tabContentFactory(item, i, activeTabIndex===i, classes))}
+                </div>
             </div>
         )
 

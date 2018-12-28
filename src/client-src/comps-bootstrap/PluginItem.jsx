@@ -1,3 +1,7 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react'
 
 var roundedStyle = {
@@ -19,7 +23,7 @@ function getStyle(color) {
  *
  */
 export default class PluginItem extends React.Component {
-    
+
     constructor() {
         super()
 

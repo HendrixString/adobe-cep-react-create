@@ -1,3 +1,7 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react'
 
 export default class Upload extends React.Component {
@@ -10,5 +14,5 @@ export default class Upload extends React.Component {
         )
 
     }
-    
+
 }

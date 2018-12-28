@@ -1,3 +1,7 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react';
 
 /**
@@ -21,11 +25,16 @@ export default class Hideable extends React.Component {
     }
 
     render() {
-        const { visible, invisible } = this.props
+        const { visible, invisible, style, className} = this.props
         const resolved = visible ? true : false
 
+        var mergedStyle = this.visStyle(resolved)
+
+        if(style)
+            mergedStyle = Object.assign(style, mergedStyle)
+
         return (
-            <div style={this.visStyle(resolved)}>
+            <div style={mergedStyle} className={className}>
                 {this.props.children}
             </div>
         )

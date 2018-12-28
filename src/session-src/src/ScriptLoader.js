@@ -1,7 +1,13 @@
 /**
+ * @author Tomer Riko Shalev
+ */
+
+/**
  * load jsx scripts dynamically
  */
 class ScriptLoader {
+    EvalScript_ErrMessage = "EvalScript error."
+
     constructor() {
         this.cs = new CSInterface()
     }
@@ -29,20 +35,58 @@ class ScriptLoader {
     }
 
     /**
-     * evalScript -
+     * evalScript - evaluate a JSX script
      *
      * @param  {type} functionName the string name of the function to invoke
-     * @param  {type} params       the params object
+     * @param  {type} params the params object
      * @return {Promise} a promise
      */
     evalScript(functionName, params) {
         var params_string = params ? JSON.stringify(params) : ''
         var eval_string = `${functionName}('${params_string}')`
         var that = this
-        return new Promise(function(resolve, reject){
-            that.cs.evalScript(eval_string, resolve)
+
+        return new Promise((resolve, reject) => {
+
+            var callback = function(eval_res) {
+                // console.log('weird' + eval_res)
+                if(typeof eval_res === 'string') {
+                    // console.log(eval_res)
+                    if(eval_res.toLowerCase().indexOf('error') != -1) {
+                        that.log('err eval')
+                        reject(that.createScriptError(eval_res))
+
+                        return
+                    }
+                }
+
+                that.log('success eval')
+
+                resolve(eval_res)
+
+                return
+            }
+
+            that.cs.evalScript(eval_string, callback)
         })
 
+    }
+
+    createScriptError(reason, data) {
+        return {reason, data}
+    }
+
+    /**
+     * log some info with session prefix
+     *
+     * @param  {string} val what to log
+     */
+    log(val) {
+        console.log(`${this.name} ${val}`)
+    }
+
+    get name() {
+        return 'ScriptLoader:: '
     }
 
 }

@@ -1,3 +1,7 @@
+/**
+ * @author Tomer Riko Shalev
+ */
+
 import React from 'react'
 import InputLabel from '@material-ui/core/InputLabel'
 import Input from '@material-ui/core/Input'
@@ -16,17 +20,17 @@ const styles = theme => ({
     margin: {
         margin: theme.spacing.unit,
     },
-    cssLabel: {
-        '&$cssFocused': {
-            color: purple[500],
-        },
-    },
-    cssFocused: {},
-    cssUnderline: {
-        '&:after': {
-            borderBottomColor: purple[500],
-        },
-    },
+    // cssLabel: {
+    //     '&$cssFocused': {
+    //         color: purple[500],
+    //     },
+    // },
+    // cssFocused: {},
+    // cssUnderline: {
+    //     '&:after': {
+    //         borderBottomColor: purple[500],
+    //     },
+    // },
     folder: {
         marginRight: theme.spacing.unit * 3.5
     }
