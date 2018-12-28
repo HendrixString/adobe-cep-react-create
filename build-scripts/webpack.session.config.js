@@ -1,5 +1,6 @@
 const path = require('path');
 // const CopyWebpackPlugin = require('copy-webpack-plugin')
+const nodeExternals = require('webpack-node-externals');
 const pluginConfig = require('../pluginrc.js')
 const distFolder = path.join(pluginConfig.destinationFolder, pluginConfig.extensionBundleId)
 const srcFolder = pluginConfig.sourceFolder
@@ -10,6 +11,7 @@ const ENTRY_POINT_SESSION_PATH = path.join(SESSION_SRC_PATH, 'index.js')
 module.exports = (env) => ({
     entry: ENTRY_POINT_SESSION_PATH,
     target: 'node',
+    externals: [nodeExternals({modulesDir: path.join(SESSION_SRC_PATH, 'node_modules')})],
     module: {
         rules: [
         {
