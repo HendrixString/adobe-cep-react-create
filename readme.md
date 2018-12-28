@@ -79,6 +79,12 @@ generate the `./dist/CSXS/manifest.xml` and `.debug` (in dev mode) file for you.
 also, I added support for a custom certificate and for a self-signed certificate.  
 feel free to modify the contents of the `assets` folder for you own need.
 
+#### how to debug
+debugging is achieved through the chrome debugger
+- release a dev build with `npm run release:dev`
+- inside Adobe, open the extension, you may have to restart if this is the first time.
+- open a browser at the following location http://localhost:3001/
+
 ### what does this include ?
 this bootstrap is composed of three parts
 
