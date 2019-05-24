@@ -69,6 +69,10 @@ function build() {
         utils.log_progress('rendering manifest.xml ...')
         var manifest_template = require(path.join(templatesFolder, 'manifest.template.xml.js'))
         var rendered_xml = manifest_template(pluginConfig)
+        
+        var xml_out_dir = path.join(pluginFolder, 'CSXS')
+        fs.mkdir(xml_out_dir, { recursive: true }, (err) => {if (err) throw err;});
+        
         var xml_out_file = path.join(pluginFolder, 'CSXS', 'manifest.xml')
         fs.writeFileSync(xml_out_file, rendered_xml, 'utf-8')
 
