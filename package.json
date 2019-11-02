@@ -14,7 +14,7 @@
     "archive": "node ./build-scripts/archive.js",
     "release:dev": "npm run build:dev && npm run deploy:dev",
     "release:prod": "npm run build:prod && npm run deploy:prod && npm run archive",
-    "postinstall": "mkdir -p src/session-src/node_modules",
+    "postinstall": "mkdirp src/session-src/node_modules",
     "b": "babel ./client/js --out-dir ./client/out",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,6 +35,7 @@
     "hard-source-webpack-plugin": "^0.12.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",
+    "mkdirp": "^0.5.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.2",
     "webpack-cli": "^3.1.0",
