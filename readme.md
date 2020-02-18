@@ -83,7 +83,7 @@ feel free to modify the contents of the `assets` folder for you own need.
 debugging is achieved through the chrome debugger
 - release a dev build with `npm run release:dev`
 - inside Adobe, open the extension, you may have to restart if this is the first time.
-- open a browser at the following location http://localhost:3001/
+- open a browser at the following location http://localhost:`PORT`/ (See port number in .debug file)
 
 ### what does this include ?
 this bootstrap is composed of three parts

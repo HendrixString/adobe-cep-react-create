@@ -8,9 +8,8 @@ const path = require('path')
 const utils = require('./utils.js')
 const pluginConfig = require('../pluginrc.js')
 const distFolder = path.join(pluginConfig.destinationFolder, pluginConfig.extensionBundleId)
-const srcFolder = pluginConfig.sourceFolder
-var env = utils.resolveEnv()
-const isDev = env==='development'
+const env = utils.resolveEnv()
+const isDev = env === 'development'
 const isWindows = utils.resolveWindows()
 const extensionBundleId = pluginConfig.extensionBundleId
 const resolvedTargetFolder = resolveDeploymentFolder()
@@ -54,7 +53,11 @@ function resolveDeploymentFolder() {
  */
 function resolveExtensionFolder() {
     if (isWindows) {
-        return 'C:\\Program Files (x86)\\Common Files\\Adobe\\CEP\\extensions';
+        const extensionsPath = os.userInfo().homedir + '\\AppData\\Roaming\\Adobe\\CEP\\extensions'
+        if (!fs.existsSync(extensionsPath))
+            fs.mkdirSync(extensionsPath, { recursive: true })
+
+        return extensionsPath;
     } else {
         return path.join(os.homedir(), 'Library/Application Support/Adobe/CEP/extensions')
     }
@@ -74,7 +77,7 @@ function cleanTarget(target) {
             fs.unlinkSync(target)
         utils.deleteFolderRecursive(target)
     } catch (err) {
-        utils.log_progress(err, 'red')
+        utils.log_error(err)
     }
 }
 
@@ -85,21 +88,15 @@ function cleanTarget(target) {
 function deployDevMode() {
     try {
         utils.log_progress('patching')
-        execSync('defaults write com.adobe.CSXS.15 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.14 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.13 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.12 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.11 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.10 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.9 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.8 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.7 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.6 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.5 PlayerDebugMode 1', {stdio:[0,1,2]})
-        execSync('defaults write com.adobe.CSXS.4 PlayerDebugMode 1', {stdio:[0,1,2]})
-
+        if (isWindows) {
+            execSync('REG ADD HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.8 /v PlayerDebugMode /t REG_SZ /d 1 /f') // CC 2018
+            execSync('REG ADD HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.9 /v PlayerDebugMode /t REG_SZ /d 1 /f') // CC 2019 & 2020
+        } else {
+            execSync('defaults write com.adobe.CSXS.8 PlayerDebugMode 1', { stdio: [0, 1, 2] }) // CC 2018
+            execSync('defaults write com.adobe.CSXS.9 PlayerDebugMode 1', { stdio: [0, 1, 2] }) // CC 2019 & 2020
+        }
     } catch(err) {
-        utils.log_progress(err, 'red')
+        utils.log_error(err)
     }
 
     utils.log_progress('creating symlink into extensions folder')
@@ -108,7 +105,7 @@ function deployDevMode() {
 
         fs.symlinkSync(distFolder, resolvedTargetFolder, type)
     } catch(err) {
-        utils.log_progress(err, 'red')
+        utils.log_error(err)
     }
 
 }
@@ -124,7 +121,7 @@ function deployProdMode() {
         utils.copyRecursiveSync(distFolder, resolvedTargetFolder)
 
     } catch(err) {
-        utils.log_progress(err, 'red')
+        utils.log_error(err)
     }
 
 }
