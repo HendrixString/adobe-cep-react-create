@@ -9,6 +9,7 @@ and with support for extendscript (host app). It is built in a semi opinionated
 way so you can focus on writing your great extensions.
 
 #### how to build
+first run `npm  install`, then choose  
 - `npm run build:dev` / `npm run build:prod` - will build into `./dist` folder
 - `npm run deploy:dev` / `npm run deploy:prod` - will deploy `./dist` folder into the extension folder.
 if in dev mode, it will create a **symbolic link**, otherwise it will copy the entire folder.
