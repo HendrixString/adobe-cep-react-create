@@ -1,0 +1,60 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build:dev",
+      "type": "shell",
+      "command": "yarn build:dev",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "deploy:dev",
+      "type": "shell",
+      "command": "yarn deploy:dev",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "build:prod",
+      "type": "shell",
+      "command": "yarn build:prod",
+      "problemMatcher": [],
+      "group":  "build"
+    },
+    {
+      "label": "deploy:prod",
+      "type": "shell",
+      "command": "yarn deploy:prod",
+      "problemMatcher": [],
+      "group":  "build"
+    },
+    {
+      "label": "archive",
+      "type": "shell",
+      "command": "yarn archive",
+      "problemMatcher": [],
+      "group":  "build"
+    },
+    {
+      "label": "release:dev",
+      "type": "shell",
+      "command": "yarn release:dev",
+      "problemMatcher": [],
+      "group":  "build"
+    },
+    {
+      "label": "release:prod",
+      "type": "shell",
+      "command": "yarn release:prod",
+      "problemMatcher": [],
+      "group":  "build"
+    }
+  ]
+}
