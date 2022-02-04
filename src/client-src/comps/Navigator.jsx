@@ -101,7 +101,6 @@ class Navigator extends React.Component {
         )
 
     }
-
 }
 
 export default withStyles(styles)(Navigator);

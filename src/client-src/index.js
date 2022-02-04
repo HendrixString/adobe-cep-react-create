@@ -11,6 +11,4 @@ import './assets/fonts/typeface-roboto/index.css';
 import './assets/fonts/material-icons/index.css';
 import './assets/css/style.css';
 
-ReactDOM.render(<App controller={controller}/>,
-                document.getElementById('root')
-)
+ReactDOM.render(<App />, document.querySelector('#root'));

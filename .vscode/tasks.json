@@ -2,6 +2,16 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "client:dev-server",
+      "type": "shell",
+      "command": "yarn client:dev-server",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
       "label": "build:dev",
       "type": "shell",
       "command": "yarn build:dev",
