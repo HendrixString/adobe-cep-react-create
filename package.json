@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node ./scripts/build.js",
     "start": "npm run client:dev-server",
-    "client:dev-server": "webpack-dev-server --config ./build-scripts/webpack.client.config.js --env.target=web --mode development --open",
+    "client:dev-server": "webpack serve --config ./build-scripts/webpack.client.config.js --env target=web --mode development --open",
     "build:dev": "node ./build-scripts/build.js development",
     "build:prod": "node ./build-scripts/build.js production",
     "deploy:dev": "node ./build-scripts/deploy.js development",
@@ -23,16 +23,11 @@
   "devDependencies": {
     "chalk": "^2.4.1",
     "copy-webpack-plugin": "^4.5.2",
-    "css-loader": "^1.0.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "file-loader": "^1.1.11",
     "hard-source-webpack-plugin": "^0.12.0",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.1",
     "mkdirp": "^0.5.1",
     "style-loader": "^0.21.0",
-    "webpack": "4.41.2",
-    "webpack-cli": "^3.1.0",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^3.7.2",
     "webpack-node-externals": "^1.7.2",
     "zxp-sign-cmd": "^1.0.0"
@@ -47,6 +42,10 @@
     "@fontsource/roboto": "^4.5.2",
     "@mui/material": "^5.4.0",
     "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.3",
     "react": "17.0.0",
     "react-dom": "17.0.0"
   }

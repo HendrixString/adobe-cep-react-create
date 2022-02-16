@@ -45,10 +45,10 @@ function build() {
         //   }));
         // });
 
-        execSync(`webpack --config ${webpack_client_config_path}  --display minimal --display-chunks --env.target=node --mode ${env}`, {stdio:[0,1,2]})
+        execSync(`webpack --config ${webpack_client_config_path}    --env target=node --mode ${env}`, {stdio:[0,1,2]})
         // bundle the session
         utils.log_progress('bundeling session...')
-        execSync(`webpack --config ${webpack_session_config_path} --display normal --display-chunks --env.target=node --mode ${env}`, {stdio:[0,1,2]})
+        execSync(`webpack --config ${webpack_session_config_path}  --env target=node --mode ${env}`, {stdio:[0,1,2]})
         // copy the host code
         utils.log_progress('copying host code...')
         utils.copyRecursiveSync(fromSrc('host'), fromPlugin('host'))
